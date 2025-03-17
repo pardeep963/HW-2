@@ -38,6 +38,5 @@ comic-app/
 - dev.ps.script: JavaScript functionality
 
 ## Course Information
-- Course: [Course Code]
+- Course: MMED-1054
 - Student: Pardeep Singh
-- Term: [Term]
