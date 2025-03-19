@@ -116,7 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Add smooth scroll for navigation
     document.querySelectorAll('nav a').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
