@@ -1,23 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // DOM Elements
     const characters = document.querySelectorAll('.character');
     const lightboxes = document.querySelectorAll('.lightbox');
     const closeBtns = document.querySelectorAll('.close');
     const nav = document.querySelector('nav');
 
-    // Add entrance animations to characters
     characters.forEach((character, index) => {
         character.style.opacity = '0';
         character.style.transform = 'translateY(20px)';
 
-        // Stagger the entrance animations
         setTimeout(() => {
             character.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
             character.style.opacity = '1';
             character.style.transform = 'translateY(0)';
         }, 100 * index);
 
-        // Click handler for characters
         character.addEventListener('click', () => {
             const memberId = character.getAttribute('data-member');
             const lightbox = document.getElementById(memberId);
@@ -39,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Add hover effect to nav links
     const navLinks = nav.querySelectorAll('a');
     navLinks.forEach(link => {
         link.addEventListener('mouseenter', (e) => {
@@ -66,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Close lightbox functionality
     closeBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
             const lightbox = btn.closest('.lightbox');
@@ -76,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Close lightbox when clicking outside content
     lightboxes.forEach(lightbox => {
         lightbox.addEventListener('click', (e) => {
             if (e.target === lightbox) {
@@ -85,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Close lightbox with Escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             const activeLightbox = document.querySelector('.lightbox.show');
@@ -95,7 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Helper function to close lightbox with animation
     function closeLightbox(lightbox) {
         const content = lightbox.querySelector('.lightbox-content');
         content.style.opacity = '0';
@@ -105,7 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
             lightbox.classList.remove('show');
             document.body.style.overflow = ''; // Restore scroll
 
-            // Reset content styles after animation
             setTimeout(() => {
                 content.style.opacity = '';
                 content.style.transform = '';
@@ -113,13 +103,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     }
 
-    // Add smooth scroll for navigation
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
                 target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Add smooth scroll for navigation
+    document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+                targetSection.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
                 });
